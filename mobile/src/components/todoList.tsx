@@ -5,12 +5,14 @@ import TodoElement from './todoElement'
 
 
 const TodoList = (props: ITodoList) => {
+  const [todos, setTodos] = useState<ITodo[]>(props.data)
+
   const renderTodo = (todo: ITodo) => <TodoElement {...todo} />
 
   return (
     <FlatList
       style={styles.container}
-      data={props.data}
+      data={todos}
       renderItem={renderTodo}
       keyExtractor={(item) => item._id}
     />
