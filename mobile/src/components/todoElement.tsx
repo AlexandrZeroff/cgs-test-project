@@ -2,11 +2,10 @@ import React, { useState } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { ITodo } from '../interfaces/todo'
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
-
+import {colors, radiuses} from '../theme/themes'
 
 const TodoElement = (todo: any) => {
 
-  console.log(todo)
 
   return (
     <>
@@ -14,9 +13,8 @@ const TodoElement = (todo: any) => {
         <Text style={styles.itemTitle}>{todo.item.todoTitle}</Text>
         <BouncyCheckbox 
           size={25}
-          fillColor='#6075c3'
+          fillColor={colors.light}
           isChecked={todo.item.isCompleted}
-          text="Completed"
           onPress={() => {}}
         />
       </View>
@@ -29,14 +27,18 @@ const styles = StyleSheet.create({
     width: '100%',
     minHeight: 50,
     height: 'auto',
-    backgroundColor: '#ffffff',
-    borderRadius: 5,
+    backgroundColor: colors.primary,
+    borderRadius: radiuses.r5,
     marginVertical: 3,
-    paddingHorizontal: 10,
-    justifyContent: 'center'
+    paddingRight: 10,
+    paddingLeft: 20,
+    justifyContent: 'space-between',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center'
   },
   itemTitle: {
-    color: '#000',
+    color: colors.white,
     fontSize: 16,
     fontWeight: 'normal'
   },
