@@ -14,6 +14,7 @@ export const margins = {
   m16: 16,
   m20: 20,
   m24: 24,
+  m28: 28,
   m32: 32
 }
 
@@ -22,7 +23,10 @@ export const paddings = {
   p8: 8,
   p12: 12,
   p16: 16,
-  p20: 20
+  p20: 20,
+  p24: 24,
+  p28: 28,
+  p32: 32
 }
 
 export const fontSizes = {

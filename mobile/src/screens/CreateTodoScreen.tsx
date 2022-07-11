@@ -3,11 +3,15 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { StyleSheet, Text } from 'react-native'
 import {colors} from '../theme/themes'
 import CreateTodo from '../components/CreateTodo'
+import Button from '../components/StyledButton'
+import { useNavigation } from '@react-navigation/native'
 
-export default function CreateTodoScreen(){
+export default function CreateTodoScreen({navigation}){
+
     return(
         <SafeAreaView style={styles.container}>
             <Text>Create new task</Text>
+            <Button title='Back' onPress={() => navigation.push('Home')}/>
             <CreateTodo />
         </SafeAreaView>
     )

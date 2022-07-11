@@ -5,22 +5,22 @@ import TodoElement from './todoElement'
 import TodoService from '../service/todos.service'
 import { useQuery } from 'react-query'
 import { todos } from '../config/QUERY_KEYS'
+import { ITodoProps } from './todoElement'
 
 
 const TodoList = () => {
   const todoService = new TodoService()
 
   const { data } = useQuery(todos, () => todoService.getAllTodos())
+
+
   console.log(data)
-
-  const renderTodo = (todo: ITodo) => <TodoElement {...todo} />
-
   return (
     <FlatList
       style={styles.container}
       data={data}
-      renderItem={renderTodo}
-      keyExtractor={(item) => item._id}
+      renderItem={(todo: ITodoProps) => <TodoElement {...todo} />}
+      keyExtractor={(todo) => todo._id}
     />
   )
 }

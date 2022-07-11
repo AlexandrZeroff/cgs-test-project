@@ -6,7 +6,7 @@ import { colors, fontSizes, paddings, radiuses } from '../theme/themes'
 import Button from '../components/StyledButton'
 import { createTodo } from '../config/ROUTER_KEYS'
 
-export default function Home() {
+export default function HomeScreen() {
   const navigation = useNavigation()
   return (
     <SafeAreaView style={styles.container}>
