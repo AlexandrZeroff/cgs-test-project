@@ -5,18 +5,28 @@ interface ButtonProps {
   iconName: string
   size: number
   color: string
+  backgroundColor?: string
   onPress(): any
+  styles?: {}
 }
 
-const IconButton: React.FC<ButtonProps> = ({iconName, size, color, onPress}) => {
+const IconButton: React.FC<ButtonProps> = ({
+  iconName,
+  size,
+  color,
+  backgroundColor = 'transparent',
+  onPress,
+  styles = {},
+}) => {
   return (
     <Icon.Button
       name={iconName}
       size={size}
       color={color}
-      backgroundColor={'transparent'}
+      backgroundColor={backgroundColor}
       onPress={onPress}
-      iconStyle={{marginRight: 0}}
+      iconStyle={{ marginRight: 0 }}
+      style={styles}
     />
   )
 }

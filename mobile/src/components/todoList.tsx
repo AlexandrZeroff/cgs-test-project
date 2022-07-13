@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { StyleSheet, FlatList } from 'react-native'
 import { ITodo, ITodoList } from '../interfaces/todo'
 import TodoElement from './todoElement'
@@ -12,7 +12,6 @@ const TodoList = () => {
   const todoService = new TodoService()
 
   const { data } = useQuery(todos, () => todoService.getAllTodos())
-
 
   console.log(data)
   return (
@@ -29,7 +28,6 @@ export default TodoList
 
 const styles = StyleSheet.create({
   container: {
-    // height: '100%', maxHeight: '100%',
     height: 500,
     width: '100%',
     flexDirection: 'column',

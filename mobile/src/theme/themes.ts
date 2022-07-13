@@ -1,9 +1,12 @@
+import { StyleSheet } from "react-native"
+
 export const colors = {
   primary: '#041955',
   secondary: '#3450a1',
   light: '#eb06ff',
   white: '#fff',
-  blue: '#1759c3'
+  blue: '#1759c3',
+  error: '#FF2A4E'
 }
 
 export const margins = {
@@ -42,3 +45,31 @@ export const radiuses = {
   r5: 5,
   r10: 10
 }
+
+export const commonStyles = StyleSheet.create({
+  columnContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  rowContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  rowContainerBetween: {
+    justifyContent: 'space-between',
+  },
+  rowContainerCenter: {
+    justifyContent: 'center',
+  },
+  rowContainerStart: {
+    justifyContent: 'flex-start',
+  },
+  screenHeader: {
+    margin: 10,
+    textAlign: 'center',
+    fontSize: fontSizes.f24,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+})

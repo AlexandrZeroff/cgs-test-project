@@ -2,17 +2,17 @@ import React from 'react'
 import { StyleSheet, Text, SafeAreaView } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import TodoList from '../components/todoList'
-import { colors, fontSizes, paddings, radiuses } from '../theme/themes'
-import Button from '../components/StyledButton'
+import { colors, commonStyles } from '../theme/themes'
+import CustomButton from '../components/CustomButton'
 import { createTodo } from '../config/ROUTER_KEYS'
 
 export default function HomeScreen() {
   const navigation = useNavigation()
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.text}>Task List App</Text>
+      <Text style={commonStyles.screenHeader}>Task List App</Text>
       <TodoList />
-      <Button title="Add task" onPress={() => {navigation.navigate(createTodo)}} />
+      <CustomButton title="Add task" onPress={() => {navigation.navigate(createTodo)}} />
     </SafeAreaView>
   )
 }
@@ -27,12 +27,5 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
     flex: 1,
-  },
-  text: {
-    margin: 10,
-    textAlign: 'center',
-    fontSize: fontSizes.f24,
-    fontWeight: 'bold',
-    color: 'white',
   },
 })

@@ -7,12 +7,12 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import HomeScreen from './src/screens/HomeScreen';
 import { createTodo, editTodo, home } from './src/config/ROUTER_KEYS';
 import CreateTodoScreen from './src/screens/CreateTodoScreen';
-
+import EditTodoScreen from './src/screens/EditTodoScreen';
 
 
 const Stack = createStackNavigator()
 
-const queryClient = new QueryClient();
+export const queryClient = new QueryClient();
 
 export default function App() {
   return (
@@ -21,6 +21,7 @@ export default function App() {
         <Stack.Navigator>
           <Stack.Screen name={home} component={HomeScreen} options={{ headerShown: false }}/>
           <Stack.Screen name={createTodo} component={CreateTodoScreen} options={{ headerShown: false }}/>
+          <Stack.Screen name={editTodo} component={EditTodoScreen} options={{ headerShown: false }}/>
         </Stack.Navigator>
       </QueryClientProvider>
     </NavigationContainer>

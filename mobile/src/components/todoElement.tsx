@@ -2,8 +2,19 @@ import React, { useState } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { ITodo } from '../interfaces/todo'
 import BouncyCheckbox from 'react-native-bouncy-checkbox'
-import { colors, radiuses, fontSizes, paddings, margins } from '../theme/themes'
+import {
+  colors,
+  radiuses,
+  fontSizes,
+  paddings,
+  margins,
+  commonStyles,
+} from '../theme/themes'
 import IconButton from './IconButton'
+import { useMutation, useQueryClient } from 'react-query'
+import TodoService from '../service/todos.service'
+import { todos } from '../config/QUERY_KEYS'
+import { queryClient } from '../../App'
 
 export interface ITodoProps {
   index: number
@@ -12,17 +23,29 @@ export interface ITodoProps {
 }
 
 const TodoElement = (props: ITodoProps) => {
+  const todoService = new TodoService()
+
+   const deleteTask = useMutation(
+    todoService.deleteTodo.bind(todoService),
+    {
+      onSuccess: () => {queryClient.invalidateQueries(todos)}
+    }
+    ) 
+
   const { item } = props
-  console.log(item)
   return (
     <>
-      <View style={[styles.columnContainer, styles.mainContainer]}>
-        <View style={[styles.rowContainer, styles.rowContainerBetween]}>
-          <View style={[styles.columnContainer, styles.textBox]}>
+      <View style={[commonStyles.columnContainer, styles.mainContainer]}>
+        <View
+          style={[commonStyles.rowContainer, commonStyles.rowContainerBetween]}
+        >
+          <View style={[commonStyles.columnContainer, styles.textBox]}>
             <Text style={styles.itemTitle}>{item.todoTitle}</Text>
             <Text style={styles.itemText}>{item.todoDescription}</Text>
           </View>
-          <View style={[styles.rowContainer, styles.rowContainerCenter]}>
+          <View
+            style={[commonStyles.rowContainer, commonStyles.rowContainerCenter]}
+          >
             <IconButton
               iconName={'edit'}
               size={30}
@@ -33,11 +56,11 @@ const TodoElement = (props: ITodoProps) => {
               iconName={'trash'}
               size={30}
               color={colors.light}
-              onPress={() => {}}
+              onPress={() => deleteTask.mutate(item._id)}
             />
           </View>
         </View>
-        <View style={styles.rowContainer}>
+        <View style={commonStyles.rowContainer}>
           <BouncyCheckbox
             size={30}
             fillColor={colors.secondary}
@@ -76,24 +99,7 @@ const styles = StyleSheet.create({
     paddingVertical: paddings.p20,
     paddingHorizontal: paddings.p20,
   },
-  columnContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  rowContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  rowContainerBetween: {
-    justifyContent: 'space-between',
-  },
-  rowContainerCenter: {
-    justifyContent: 'center',
-  },
-  rowContainerStart: {
-    justifyContent: 'flex-start',
-  },
+
   textBox: {
     width: '75%',
     marginBottom: margins.m8,
