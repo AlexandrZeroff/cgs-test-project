@@ -5,24 +5,12 @@ import { graphqlHTTP } from 'express-graphql'
 import { buildSchema } from 'graphql'
 import AppRouter from './routes'
 import axios from 'axios'
-
-
 import handleError from './middleware/errorHandle.middleware'
 
 const app = express()
 const router = new AppRouter(app)
 // Connect to MongoDB
 connectDB()
-
-//CORS configuration to fix Axios errors while fetching data
-const cors=require("cors");
-const corsOptions ={
-   origin:'*', 
-   credentials:true,            //access-control-allow-credentials:true
-   optionSuccessStatus:200,
-}
-
-app.use(cors(corsOptions)) // Use this after the variable declaration
 
 // Express configuration
 app.set('port', process.env.PORT || 5000)
@@ -37,6 +25,16 @@ const schema = buildSchema(`
     todos: String
   }
 `)
+
+// Fixing an error while fetching data from localhost:5000
+const cors = require('cors')
+const corsOptions = {
+  origin: '*',
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+}
+
+app.use(cors(corsOptions))
 
 // TODO: Create graphQL controller
 const rootValue = {
