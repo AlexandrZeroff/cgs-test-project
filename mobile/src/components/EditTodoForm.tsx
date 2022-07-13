@@ -19,7 +19,6 @@ import { todos } from '../config/QUERY_KEYS'
 import IconButton from './IconButton'
 import { home } from '../config/ROUTER_KEYS'
 import { useNavigation } from '@react-navigation/native'
-import { ParamListBase } from '@react-navigation/native'
 
 interface IEditParams {
   todo: ITodo
@@ -35,7 +34,7 @@ const EditTodoForm = ({ todo }: IEditParams) => {
 
   const updateTodo = useMutation(
     todoService.updateTodo.bind(todoService),
-    invalidateQueries,
+    invalidateQueries
   )
 
   return (
