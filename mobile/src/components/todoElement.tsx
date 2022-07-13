@@ -15,6 +15,8 @@ import { useMutation, useQueryClient } from 'react-query'
 import TodoService from '../service/todos.service'
 import { todos } from '../config/QUERY_KEYS'
 import { queryClient } from '../../App'
+import { useNavigation } from '@react-navigation/native'
+import { editTodo } from '../config/ROUTER_KEYS'
 
 export interface ITodoProps {
   index: number
@@ -23,6 +25,8 @@ export interface ITodoProps {
 }
 
 const TodoElement = (props: ITodoProps) => {
+
+  const navigation = useNavigation()
   const todoService = new TodoService()
 
    const deleteTask = useMutation(
@@ -50,7 +54,7 @@ const TodoElement = (props: ITodoProps) => {
               iconName={'edit'}
               size={30}
               color={colors.light}
-              onPress={() => {}}
+              onPress={() => navigation.navigate(editTodo, item)}
             />
             <IconButton
               iconName={'trash'}

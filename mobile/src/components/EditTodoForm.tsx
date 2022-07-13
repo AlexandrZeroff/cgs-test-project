@@ -1,11 +1,5 @@
 import React from 'react'
-import {
-  View,
-  Text,
-  TextInput,
-  StyleSheet,
-  SafeAreaView
-} from 'react-native'
+import { View, Text, TextInput, StyleSheet, SafeAreaView } from 'react-native'
 import { useMutation } from 'react-query'
 import {
   colors,
@@ -25,15 +19,22 @@ import { todos } from '../config/QUERY_KEYS'
 import IconButton from './IconButton'
 import { home } from '../config/ROUTER_KEYS'
 import { useNavigation } from '@react-navigation/native'
+import { ParamListBase } from '@react-navigation/native'
 
-const CreateTodoForm = () => {
+interface IEditParams {
+  todo: ITodo
+}
 
+const EditTodoForm = ({ todo }: IEditParams) => {
   const navigation = useNavigation()
   const todoService = new TodoService()
 
-  const invalidateQueries = { onSuccess: () => queryClient.invalidateQueries(todos) }
-  const addTodo = useMutation(
-    todoService.createTodo.bind(todoService),
+  const invalidateQueries = {
+    onSuccess: () => queryClient.invalidateQueries(todos),
+  }
+
+  const updateTodo = useMutation(
+    todoService.updateTodo.bind(todoService),
     invalidateQueries,
   )
 
@@ -41,16 +42,16 @@ const CreateTodoForm = () => {
     <SafeAreaView>
       <Formik
         initialValues={{
-          userID: '1',
-          todoTitle: '',
-          todoDescription: '',
-          todoYear: new Date().getFullYear(),
-          isCompleted: false,
-          isPublic: false,
+          userID: todo.userID,
+          todoTitle: todo.todoTitle,
+          todoDescription: todo.todoDescription,
+          todoYear: todo.todoYear,
+          isCompleted: todo.isCompleted,
+          isPublic: todo.isPublic,
         }}
         validationSchema={todoValidationSchema}
         onSubmit={(values) => {
-          addTodo.mutate(values)
+          updateTodo.mutate(todo._id, values)
           navigation.navigate(home)
           console.log(values)
         }}
@@ -61,7 +62,6 @@ const CreateTodoForm = () => {
           setFieldValue,
           handleSubmit,
           values,
-          isValid,
           errors,
           touched,
         }) => (
@@ -147,7 +147,7 @@ const CreateTodoForm = () => {
               style={[
                 commonStyles.rowContainer,
                 commonStyles.rowContainerCenter,
-                styles.buttonContainer
+                styles.buttonContainer,
               ]}
             >
               <IconButton
@@ -194,4 +194,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default CreateTodoForm
+export default EditTodoForm

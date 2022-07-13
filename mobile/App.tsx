@@ -9,7 +9,6 @@ import { createTodo, editTodo, home } from './src/config/ROUTER_KEYS';
 import CreateTodoScreen from './src/screens/CreateTodoScreen';
 import EditTodoScreen from './src/screens/EditTodoScreen';
 
-
 const Stack = createStackNavigator()
 
 export const queryClient = new QueryClient();
