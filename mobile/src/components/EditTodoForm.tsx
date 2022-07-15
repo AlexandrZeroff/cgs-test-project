@@ -1,23 +1,22 @@
 import React from 'react'
-import { View, Text, TextInput, StyleSheet, SafeAreaView } from 'react-native'
+import { View, StyleSheet, SafeAreaView } from 'react-native'
 import { useMutation } from 'react-query'
 import {
   colors,
-  fontSizes,
   spacings,
-  radiuses,
-  commonStyles
+  commonStyles,
 } from '../theme/themes'
 import { Formik } from 'formik'
 import TodoService from '../service/todos.service'
 import { ITodo } from '../interfaces/todo'
-import BouncyCheckbox from 'react-native-bouncy-checkbox'
 import { todoValidationSchema } from '../validation/todos.validation.schema'
 import { queryClient } from '../../App'
 import { todos } from '../config/QUERY_KEYS'
 import IconButton from './IconButton'
 import { home } from '../config/ROUTER_KEYS'
 import { useNavigation } from '@react-navigation/native'
+import { FormTextInput } from './FormTextInput'
+import { FormCheckboxInput } from './FormCheckboxInput'
 
 interface IEditParams {
   todo: ITodo
@@ -33,7 +32,7 @@ const EditTodoForm = ({ todo }: IEditParams) => {
 
   const updateTodo = useMutation(
     todoService.updateTodo.bind(todoService),
-    invalidateQueries
+    invalidateQueries,
   )
 
   return (
@@ -61,86 +60,59 @@ const EditTodoForm = ({ todo }: IEditParams) => {
           handleSubmit,
           values,
           errors,
-          touched,
         }) => (
           <View style={styles.formContainer}>
-            <Text style={styles.inputTitle}>Task title</Text>
-            <TextInput
-              style={styles.textInput}
+            <FormTextInput
+              label="Task title"
               name="todoTitle"
               placeholder="Title"
               onChangeText={handleChange('todoTitle')}
               onBlur={handleBlur('todoTitle')}
               value={values.todoTitle}
+              error={errors.todoTitle}
             />
-            {errors.todoTitle && touched.todoTitle && (
-              <Text style={{ color: colors.error, fontSize: fontSizes.f14 }}>
-                {errors.todoTitle}
-              </Text>
-            )}
-            <Text style={styles.inputTitle}>Task description</Text>
-            <TextInput
-              style={[styles.textInput, styles.multilineInput]}
+            <FormTextInput
+              label="Task description"
               name="todoDescription"
-              placeholder="Start typing here"
+              placeholder="Type something"
               onChangeText={handleChange('todoDescription')}
               onBlur={handleBlur('todoDescription')}
-              multiline={true}
               value={values.todoDescription}
+              error={errors.todoDescription}
+              multiline={true}
+              inputStyle={styles.multilineInput}
             />
-            {errors.todoDescription && touched.todoDescription && (
-              <Text style={{ color: colors.error, fontSize: fontSizes.f14 }}>
-                {errors.todoDescription}
-              </Text>
-            )}
-            <Text style={styles.inputTitle}>Year</Text>
-            <TextInput
-              style={styles.textInput}
+            <FormTextInput
+              label="Year"
               name="todoYear"
-              placeholder="2022"
+              placeholder=""
               onChangeText={handleChange('todoYear')}
               onBlur={handleBlur('todoYear')}
               value={values.todoYear.toString()}
+              error={errors.todoYear}
               keyboardType="numeric"
               maxLength={4}
             />
-            {errors.todoYear && touched.todoYear && (
-              <Text style={{ color: colors.error, fontSize: fontSizes.f14 }}>
-                {errors.todoYear}
-              </Text>
-            )}
-            <View
-              style={[
-                commonStyles.rowContainer,
-                commonStyles.rowContainerBetween,
-              ]}
-            >
-              <Text style={styles.inputTitle}>Public</Text>
-              <BouncyCheckbox
-                isChecked={values.isPublic}
-                onPress={(value) => setFieldValue('isPublic', value)}
-                size={30}
-                fillColor={colors.secondary}
-                unfillColor={colors.primary}
-                iconStyle={{ borderColor: colors.light }}
-              />
-            </View>
-            <View
-              style={[
-                commonStyles.rowContainer,
-                commonStyles.rowContainerBetween,
-              ]}
-            >
-              <Text style={styles.inputTitle}>Completed</Text>
-              <BouncyCheckbox
-                isChecked={values.isCompleted}
-                onPress={(value) => setFieldValue('isCompleted', value)}
-                size={30}
-                fillColor={colors.secondary}
-                unfillColor={colors.primary}
-                iconStyle={{ borderColor: colors.light }}
-              />
-            </View>
+            <FormCheckboxInput
+              name="isPublic"
+              label="Public"
+              value={values.isPublic}
+              setFieldValue={setFieldValue}
+              size={30}
+              fillColor={colors.secondary}
+              unfillColor={colors.primary}
+              iconStyle={{ borderColor: colors.light }}
+            />
+            <FormCheckboxInput
+              name="isCompleted"
+              label="Completed"
+              value={values.isCompleted}
+              setFieldValue={setFieldValue}
+              size={30}
+              fillColor={colors.secondary}
+              unfillColor={colors.primary}
+              iconStyle={{ borderColor: colors.light }}
+            />
             <View
               style={[
                 commonStyles.rowContainer,
@@ -165,24 +137,6 @@ const EditTodoForm = ({ todo }: IEditParams) => {
 
 const styles = StyleSheet.create({
   formContainer: {},
-  textInput: {
-    minHeight: 30,
-    height: 'auto',
-    marginBottom: spacings.s12,
-    padding: spacings.s8,
-    borderColor: colors.light,
-    borderWidth: 1,
-    backgroundColor: colors.primary,
-    color: colors.white,
-    borderRadius: radiuses.r10,
-    fontSize: fontSizes.f16,
-  },
-  inputTitle: {
-    color: colors.white,
-    fontSize: fontSizes.f20,
-    fontWeight: 'bold',
-    marginVertical: spacings.s8,
-  },
   multilineInput: {
     minHeight: 160,
     textAlignVertical: 'top',
