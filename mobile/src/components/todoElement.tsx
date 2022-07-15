@@ -71,7 +71,7 @@ const TodoElement = (props: ITodoProps) => {
             text="Completed"
             iconStyle={{ borderColor: colors.secondary }}
             textStyle={{
-              marginRight: margins.m16,
+              marginRight: spacings.s16,
               textDecorationLine: 'none',
               color: colors.white,
             }}
