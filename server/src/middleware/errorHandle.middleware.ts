@@ -8,7 +8,7 @@ function handleError(
 ) {
   const status = err.status || 400
   const message = err.message || 'Unknown error'
-  res.status(status).json({ message: message })
+  return res.status(status).json({ message: message })
 }
 
 export default handleError

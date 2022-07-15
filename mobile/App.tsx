@@ -1,20 +1,30 @@
-import {StatusBar} from 'expo-status-bar';
-import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import 'react-native-gesture-handler';
+import { StatusBar } from 'expo-status-bar'
+import React from 'react'
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import HomeScreen from './src/screens/HomeScreen';
+import { createTodo, editTodo, home } from './src/config/ROUTER_KEYS';
+import CreateTodoScreen from './src/screens/CreateTodoScreen';
+import EditTodoScreen from './src/screens/EditTodoScreen';
+
+const Stack = createStackNavigator()
+
+export const queryClient = new QueryClient();
+
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>We are Live!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    <NavigationContainer>
+      <QueryClientProvider client={queryClient}>
+        <Stack.Navigator>
+          <Stack.Screen name={home} component={HomeScreen} options={{ headerShown: false }}/>
+          <Stack.Screen name={createTodo} component={CreateTodoScreen} options={{ headerShown: false }}/>
+          <Stack.Screen name={editTodo} component={EditTodoScreen} options={{ headerShown: false }}/>
+        </Stack.Navigator>
+      </QueryClientProvider>
+    </NavigationContainer>
+  )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+

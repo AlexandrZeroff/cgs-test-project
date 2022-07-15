@@ -12,6 +12,16 @@ const router = new AppRouter(app)
 // Connect to MongoDB
 connectDB()
 
+// Fixing an error while fetching data from localhost:5000
+const cors = require('cors')
+const corsOptions = {
+  origin: '*',
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+}
+
+app.use(cors(corsOptions))
+
 // Express configuration
 app.set('port', process.env.PORT || 5000)
 app.use(express.json())
