@@ -14,9 +14,6 @@ const connectDB = async () => {
     // tslint:disable-next-line:no-console
     console.log("MongoDB Connected...");
   } catch (err) {
-    // tslint:disable-next-line:no-console
-    console.error(err.message);
-    // Exit process with failure
     process.exit(1);
   }
 };
