@@ -4,10 +4,9 @@ import { useMutation } from 'react-query'
 import {
   colors,
   fontSizes,
-  margins,
+  spacings,
   radiuses,
-  commonStyles,
-  paddings,
+  commonStyles
 } from '../theme/themes'
 import { Formik } from 'formik'
 import TodoService from '../service/todos.service'
@@ -169,8 +168,8 @@ const styles = StyleSheet.create({
   textInput: {
     minHeight: 30,
     height: 'auto',
-    marginBottom: margins.m12,
-    padding: paddings.p8,
+    marginBottom: spacings.s12,
+    padding: spacings.s8,
     borderColor: colors.light,
     borderWidth: 1,
     backgroundColor: colors.primary,
@@ -182,14 +181,14 @@ const styles = StyleSheet.create({
     color: colors.white,
     fontSize: fontSizes.f20,
     fontWeight: 'bold',
-    marginVertical: margins.m8,
+    marginVertical: spacings.s8,
   },
   multilineInput: {
     minHeight: 160,
     textAlignVertical: 'top',
   },
   buttonContainer: {
-    marginTop: margins.m16,
+    marginTop: spacings.s16,
   },
 })
 

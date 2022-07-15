@@ -1,7 +1,7 @@
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { StyleSheet, Text, View } from 'react-native'
-import { colors, commonStyles, margins } from '../theme/themes'
+import { colors, commonStyles, spacings } from '../theme/themes'
 import CreateTodoForm from '../components/CreateTodoForm'
 import IconButton from '../components/IconButton'
 import { useNavigation } from '@react-navigation/native'
@@ -13,7 +13,7 @@ export default function CreateTodoScreen({ navigation }) {
         iconName="arrow-left"
         size={25}
         color={colors.light}
-        styles={{marginLeft: margins.m24}}
+        styles={{marginLeft: spacings.s24}}
         onPress={() => navigation.push('Home')}
       />
       <Text style={commonStyles.screenHeader}>Let`s do something!</Text>
@@ -27,10 +27,9 @@ export default function CreateTodoScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 40,
+    paddingTop: spacings.s40,
     display: 'flex',
     flexDirection: 'column',
-    //alignItems: 'center',
     backgroundColor: colors.secondary,
     height: '100%',
     width: '100%',

@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, SafeAreaView } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import TodoList from '../components/todoList'
-import { colors, commonStyles } from '../theme/themes'
+import { colors, commonStyles, spacings } from '../theme/themes'
 import CustomButton from '../components/CustomButton'
 import { createTodo } from '../config/ROUTER_KEYS'
 
@@ -19,7 +19,7 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 40,
+    paddingTop: spacings.s40,
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',

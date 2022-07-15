@@ -1,6 +1,6 @@
 import React from 'react'
 import { Text, StyleSheet, TouchableOpacity } from 'react-native'
-import { colors, paddings, radiuses, fontSizes, margins } from '../theme/themes'
+import { colors, spacings, radiuses, fontSizes } from '../theme/themes'
 
 interface IButtonProps {
   title: string
@@ -23,11 +23,11 @@ const styles = StyleSheet.create({
     height: 40,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: paddings.p4,
-    paddingHorizontal: paddings.p8,
+    paddingVertical: spacings.s4,
+    paddingHorizontal: spacings.s8,
     borderRadius: radiuses.r5,
     backgroundColor: colors.light,
-    marginVertical: margins.m16,
+    marginVertical: spacings.s16,
   },
   text: {
     fontSize: fontSizes.f20,
