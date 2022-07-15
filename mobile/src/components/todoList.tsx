@@ -1,11 +1,11 @@
 import React from 'react'
 import { StyleSheet, FlatList } from 'react-native'
-import { ITodo, ITodoList } from '../interfaces/todo'
 import TodoElement from './todoElement'
 import TodoService from '../service/todos.service'
 import { useQuery } from 'react-query'
 import { todos } from '../config/QUERY_KEYS'
 import { ITodoProps } from './todoElement'
+import { spacings } from '../theme/themes'
 
 
 const TodoList = () => {
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     height: 500,
     width: '100%',
     flexDirection: 'column',
-    padding: 10,
+    padding: spacings.s12,
     overflow: 'scroll',
   },
 })

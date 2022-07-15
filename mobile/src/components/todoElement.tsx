@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { ITodo } from '../interfaces/todo'
 import BouncyCheckbox from 'react-native-bouncy-checkbox'
@@ -6,12 +6,11 @@ import {
   colors,
   radiuses,
   fontSizes,
-  paddings,
-  margins,
-  commonStyles,
+  spacings,
+  commonStyles
 } from '../theme/themes'
 import IconButton from './IconButton'
-import { useMutation, useQueryClient } from 'react-query'
+import { useMutation } from 'react-query'
 import TodoService from '../service/todos.service'
 import { todos } from '../config/QUERY_KEYS'
 import { queryClient } from '../../App'
@@ -72,7 +71,7 @@ const TodoElement = (props: ITodoProps) => {
             text="Completed"
             iconStyle={{ borderColor: colors.secondary }}
             textStyle={{
-              marginRight: margins.m16,
+              marginRight: spacings.s16,
               textDecorationLine: 'none',
               color: colors.white,
             }}
@@ -99,14 +98,14 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: colors.primary,
     borderRadius: radiuses.r10,
-    marginVertical: margins.m4,
-    paddingVertical: paddings.p20,
-    paddingHorizontal: paddings.p20,
+    marginVertical: spacings.s4,
+    paddingVertical: spacings.s20,
+    paddingHorizontal: spacings.s20,
   },
 
   textBox: {
     width: '75%',
-    marginBottom: margins.m8,
+    marginBottom: spacings.s8,
   },
   itemTitle: {
     color: colors.white,
@@ -115,7 +114,7 @@ const styles = StyleSheet.create({
   },
   itemText: {
     color: colors.white,
-    marginTop: margins.m8,
+    marginTop: spacings.s8,
     fontSize: fontSizes.f16,
   },
 })

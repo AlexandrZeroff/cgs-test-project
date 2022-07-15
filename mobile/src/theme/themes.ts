@@ -9,27 +9,17 @@ export const colors = {
   error: '#FF2A4E'
 }
 
-export const margins = {
-  m4: 4,
-  m6: 6,
-  m8: 8,
-  m12: 12,
-  m16: 16,
-  m20: 20,
-  m24: 24,
-  m28: 28,
-  m32: 32
-}
-
-export const paddings = {
-  p4: 4,
-  p8: 8,
-  p12: 12,
-  p16: 16,
-  p20: 20,
-  p24: 24,
-  p28: 28,
-  p32: 32
+export const spacings = {
+  s4: 4,
+  s6: 6,
+  s8: 8,
+  s12: 12,
+  s16: 16,
+  s20: 20,
+  s24: 24,
+  s28: 28,
+  s32: 32,
+  s40: 40
 }
 
 export const fontSizes = {
@@ -66,7 +56,7 @@ export const commonStyles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   screenHeader: {
-    margin: 10,
+    margin: spacings.s12,
     textAlign: 'center',
     fontSize: fontSizes.f24,
     fontWeight: 'bold',
