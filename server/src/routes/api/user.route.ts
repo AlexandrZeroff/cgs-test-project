@@ -1,4 +1,8 @@
 import { Router, Request, Response } from "express";
+import handleError from "../../middleware/errorHandle.middleware";
+import userController from "../../controllers/user.controller";
+import { responseHandler } from "../../middleware/responseHandler";
+import { checkUserReq } from "../../middleware/checkUserReq";
 
 const router: Router = Router();
 
@@ -7,9 +11,16 @@ const router: Router = Router();
 // @access  Public
 router.post(
   "/register",
-  async (_: Request, res: Response) => {
-    res.send("Add registration logic there");
-  }
+  checkUserReq,
+  responseHandler(userController.registerUser.bind(userController)),
+  handleError
 );
+
+router.post(
+  "/login",
+  checkUserReq,
+  responseHandler(userController.loginUser.bind(userController)),
+  handleError
+)
 
 export default router;
